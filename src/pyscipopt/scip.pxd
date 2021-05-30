@@ -448,6 +448,12 @@ cdef extern from "scip/scip.h":
     ctypedef struct SCIP_QUADVAREVENTDATA:
         pass
 
+    ctypedef struct SCIP_CUTPOOL:
+      pass
+
+    ctypedef struct SCIP_CUT:
+      pass
+
     ctypedef struct SCIP_QUADVARTERM:
         SCIP_VAR* var
         SCIP_Real lincoef
@@ -1675,6 +1681,14 @@ cdef extern from "scip/scip_tree.h":
 cdef extern from "scip/scip_var.h":
     SCIP_RETCODE SCIPchgVarBranchPriority(SCIP* scip, SCIP_VAR* var, int branchpriority)
 
+cdef extern from "scip/scip_cut.h":
+    SCIP_CUT** SCIPgetPoolCuts(SCIP* scip)
+    int SCIPgetNPoolCuts(SCIP* scip)
+
+cdef extern from "scip/pub_cutpool.h":
+    int SCIPcutGetAge(SCIP_CUT* cut)
+    SCIP_ROW* SCIPcutGetRow(SCIP_CUT* cut)
+
 cdef class Expr:
     cdef public terms
 
@@ -1692,6 +1706,14 @@ cdef class Column:
 
     @staticmethod
     cdef create(SCIP_COL* scipcol)
+
+cdef class Cut:
+    cdef SCIP_CUT* scip_cut
+    # can be used to store problem data
+    cdef public object data
+
+    @staticmethod
+    cdef create(SCIP_CUT* scipcut)
 
 cdef class Row:
     cdef SCIP_ROW* scip_row

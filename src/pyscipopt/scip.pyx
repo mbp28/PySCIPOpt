@@ -368,6 +368,28 @@ cdef class Column:
         return (self.__class__ == other.__class__
                 and self.scip_col == (<Column>other).scip_col)
 
+cdef class Cut:
+    """Base class holding a pointer to corresponding SCIP_ROW"""
+
+    @staticmethod
+    cdef create(SCIP_CUT* scipcut):
+        if scipcut == NULL:
+            raise Warning("cannot create Row with SCIP_ROW* == NULL")
+        cut = Cut()
+        cut.scip_cut = scipcut
+        return cut
+
+    property age:
+        def __get__(self):
+            return SCIPcutGetAge(self.scip_cut)
+
+    def getRow(self):
+        "gets the row of the cut"
+        return Row.create(SCIPcutGetRow(self.scip_cut))
+
+    def silly_print(self):
+        print('Silly print.')
+
 cdef class Row:
     """Base class holding a pointer to corresponding SCIP_ROW"""
 
@@ -4636,6 +4658,29 @@ cdef class Model:
         """
         assert isinstance(var, Variable), "The given variable is not a pyvar, but %s" % var.__class__.__name__
         PY_SCIP_CALL(SCIPchgVarBranchPriority(self._scip, var.scip_var, priority))
+
+    ### Added by mbp28
+    def test_function(self):
+      return SCIPgetNNodes(self._scip)
+
+    def test_function2(self):
+        """returns a list with the nonlinear rows in SCIP's internal NLP"""
+        cdef SCIP_NLROW** nlrows
+
+        nlrows = SCIPgetNLPNlRows(self._scip)
+        return [NLRow.create(nlrows[i]) for i in range(self.getNNlRows())]
+
+    def getPoolCuts(self):
+        """returns a list with the nonlinear rows in SCIP's internal NLP"""
+        cdef SCIP_CUT** cuts
+
+        cuts = SCIPgetPoolCuts(self._scip)
+        return [Cut.create(cuts[i]) for i in range(self.getNPoolCuts())]
+
+    def getNPoolCuts(self):
+        """gets number of processed nodes in current run, including the focus node."""
+        return SCIPgetNPoolCuts(self._scip)
+
 
 # debugging memory management
 def is_memory_freed():
