@@ -129,3 +129,6 @@ model.lp
 
 # Ignore Notebooks
 *notebooks*
+
+# Mac specific
+*.DS_Store
