@@ -126,3 +126,6 @@ model.lp
 
 # VSCode
 .vscode/
+
+# Ignore Notebooks
+*notebooks*
