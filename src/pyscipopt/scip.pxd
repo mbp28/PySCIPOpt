@@ -1637,6 +1637,7 @@ cdef extern from "scip/pub_lp.h":
     SCIP_Real SCIProwGetConstant(SCIP_ROW* row)
     int SCIProwGetLPPos(SCIP_ROW* row)
     SCIP_BASESTAT SCIProwGetBasisStatus(SCIP_ROW* row)
+    SCIP_Bool SCIProwIsInGlobalCutpool(SCIP_ROW* row)
     SCIP_Bool SCIProwIsIntegral(SCIP_ROW* row)
     SCIP_Bool SCIProwIsLocal(SCIP_ROW* row)
     SCIP_Bool SCIProwIsModifiable(SCIP_ROW* row)

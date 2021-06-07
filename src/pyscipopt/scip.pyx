@@ -437,6 +437,10 @@ cdef class Row:
         else:
             raise Exception('SCIP returned unknown base status!')
 
+    def isInGlobalCutpool(self):
+        """returns TRUE iff row is member of the global cut pool"""
+        return SCIProwIsInGlobalCutpool(self.scip_row)
+
     def isIntegral(self):
         """returns TRUE iff the activity of the row (without the row's constant) is always integral in a feasible solution """
         return SCIProwIsIntegral(self.scip_row)
