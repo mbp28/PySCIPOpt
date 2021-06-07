@@ -4675,14 +4675,14 @@ cdef class Model:
         return [NLRow.create(nlrows[i]) for i in range(self.getNNlRows())]
 
     def getPoolCuts(self):
-        """returns a list with the nonlinear rows in SCIP's internal NLP"""
+        """Gets current cuts in the global cut pool."""
         cdef SCIP_CUT** cuts
 
         cuts = SCIPgetPoolCuts(self._scip)
         return [Cut.create(cuts[i]) for i in range(self.getNPoolCuts())]
 
     def getNPoolCuts(self):
-        """gets number of processed nodes in current run, including the focus node."""
+        """Gets current number of rows in the global cut pool."""
         return SCIPgetNPoolCuts(self._scip)
 
 
