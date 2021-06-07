@@ -552,6 +552,17 @@ cdef class NLRow:
         return (self.__class__ == other.__class__
                 and self.scip_nlrow == (<NLRow>other).scip_nlrow)
 
+cdef class SepaStore:
+    """Base class holding a pointer to corresponding SCIP_SEPA"""
+
+    @staticmethod
+    cdef create(SCIP_SEPASTORE* scip_sepastore):
+        if scip_sepastore == NULL:
+            raise Warning("cannot create Row with SCIP_SEPASTORE* == NULL")
+        sepastore = SepaStore()
+        sepastore.scip_sepastore = scip_sepastore
+        return sepastore
+
 cdef class Solution:
     """Base class holding a pointer to corresponding SCIP_SOL"""
 

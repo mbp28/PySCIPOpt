@@ -376,6 +376,9 @@ cdef extern from "scip/scip.h":
     ctypedef struct SCIP_SEPADATA:
         pass
 
+    ctypedef struct SCIP_SEPASTORE:
+        pass
+
     ctypedef struct SCIP_CONSHDLR:
         pass
 
@@ -1731,6 +1734,13 @@ cdef class NLRow:
 
     @staticmethod
     cdef create(SCIP_NLROW* scipnlrow)
+
+cdef class SepaStore:
+    cdef SCIP_SEPASTORE* scip_sepastore
+    cdef public object data
+
+    @staticmethod
+    cdef create(SCIP_SEPASTORE* scip_sepastore)
 
 cdef class Solution:
     cdef SCIP_SOL* sol
