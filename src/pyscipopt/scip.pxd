@@ -281,7 +281,33 @@ cdef extern from "scip/scip.h":
     ctypedef double SCIP_Real
 
     ctypedef struct SCIP:
+    # we needsepastore, blkmem, set, eventqueue, eventfilter, lp, cut, depth, &ncutsapplied
+        SCIP_CLOCK* totaltime
+        # SCIP_CUTPOOL* cutpool
+        # SCIP_EVENTFILTER* eventfilter
+        # SCIP_EVENTQUEUE* eventqueue
+        # SCIP_LP* lp
+        # SCIP_MEM* mem
+        # SCIP_SEPASTORE* sepastore
+        # SCIP_SET* set
         pass
+
+    # ctypedef struct SCIP_EVENTFILTER:
+    #     pass
+    #
+    # ctypedef struct SCIP_EVENTQUEUE:
+    #     pass
+    #
+    # ctypedef struct SCIP_LP:
+    #     pass
+    #
+    # ctypedef struct SCIP_MEM:
+    #     BMS_BLKMEM* setmem
+    #     BMS_BLKMEM* probmem
+    #     pass
+    #
+    # ctypedef struct SCIP_SET:
+    #     pass
 
     ctypedef struct SCIP_VAR:
         pass
@@ -1279,6 +1305,10 @@ cdef extern from "scip/scip.h":
     SCIP_RETCODE SCIPenableReoptimization(SCIP* scip, SCIP_Bool enable)
 
     BMS_BLKMEM* SCIPblkmem(SCIP* scip)
+
+cdef extern from "scip/type_clock.h":
+    ctypedef struct SCIP_CLOCK:
+        SCIP_Real lasttime
 
 cdef extern from "scip/tree.h":
     int SCIPnodeGetNAddedConss(SCIP_NODE* node)
