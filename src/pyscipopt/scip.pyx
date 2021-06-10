@@ -4685,6 +4685,7 @@ cdef class Model:
         cdef SCIP_MEM* mem = self._scip.mem
         cdef BMS_BLKMEM* probmem = self._scip.mem.probmem
         cdef SCIP_SET* set = self._scip.set
+        cdef SCIP_LP* lp = self._scip.lp
         return gap
         #return self._scip.stat.primaldualintegral
 

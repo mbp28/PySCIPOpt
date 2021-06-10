@@ -285,6 +285,11 @@ cdef extern from "scip/scip.h":
         SCIP_STAT* stat
         SCIP_MEM* mem
         SCIP_SET* set
+        SCIP_EVENTFILTER* eventfilter
+        SCIP_EVENTQUEUE* eventqueue
+        SCIP_SEPASTORE* sepastore
+        SCIP_CUTPOOL* cutppol
+        SCIP_LP* lp
     # ctypedef struct SCIP_EVENTFILTER:
     #     pass
     #
@@ -388,9 +393,6 @@ cdef extern from "scip/scip.h":
         pass
 
     ctypedef struct SCIP_SEPADATA:
-        pass
-
-    ctypedef struct SCIP_SEPASTORE:
         pass
 
     ctypedef struct SCIP_CONSHDLR:
@@ -1722,6 +1724,20 @@ cdef extern from "scip/struct_mem.h":
 
 cdef extern from "scip/struct_set.h":
     ctypedef struct SCIP_SET:
+        pass
+
+cdef extern from "scip/struct_event.h":
+    ctypedef struct SCIP_EVENTFILTER:
+        pass
+    ctypedef struct SCIP_EVENTQUEUE:
+        pass
+
+cdef extern from "scip/struct_sepastore.h":
+    ctypedef struct SCIP_SEPASTORE:
+        pass
+
+cdef extern from "scip/struct_lp.h":
+    ctypedef struct SCIP_LP:
         pass
 
 cdef class Expr:
