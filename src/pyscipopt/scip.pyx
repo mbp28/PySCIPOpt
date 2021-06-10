@@ -4676,10 +4676,14 @@ cdef class Model:
 
     ### Added by mbp28
     def test_function(self):
-      cdef SCIP_CLOCK* clock = self._scip.totaltime
-      cdef SCIP_Real ltime = clock.lasttime
-      #print(clock.lasttime)
-      return SCIPgetNNodes(self._scip)
+        #cdef SCIP_CLOCK* clock = self._scip.totaltime
+        #cdef SCIP_Real ltime = clock.lasttime
+        #print(clock.lasttime)
+        #return SCIPgetNNodes(self._scip)
+        cdef SCIP_STAT* stat = self._scip.stat
+        cdef SCIP_Real gap = stat.primaldualintegral
+        return gap
+        #return self._scip.stat.primaldualintegral
 
     def test_function2(self):
         """returns a list with the nonlinear rows in SCIP's internal NLP"""
