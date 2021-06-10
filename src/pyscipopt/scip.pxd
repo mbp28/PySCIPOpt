@@ -284,7 +284,7 @@ cdef extern from "scip/scip.h":
     # we needsepastore, blkmem, set, eventqueue, eventfilter, lp, cut, depth, &ncutsapplied
         SCIP_STAT* stat
         SCIP_MEM* mem
-
+        SCIP_SET* set
     # ctypedef struct SCIP_EVENTFILTER:
     #     pass
     #
@@ -1719,6 +1719,10 @@ cdef extern from "scip/struct_mem.h":
     ctypedef struct SCIP_MEM:
         BMS_BLKMEM* setmem
         BMS_BLKMEM* probmem
+
+cdef extern from "scip/struct_set.h":
+    ctypedef struct SCIP_SET:
+        pass
 
 cdef class Expr:
     cdef public terms
