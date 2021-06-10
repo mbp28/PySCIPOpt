@@ -290,6 +290,13 @@ cdef extern from "scip/scip.h":
         SCIP_SEPASTORE* sepastore
         SCIP_CUTPOOL* cutppol
         SCIP_LP* lp
+        SCIP_PROB* origprob
+        SCIP_PROB* transprob
+        SCIP_TREE* tree
+        SCIP_CLIQUETABLE* cliquetable
+        SCIP_REOPT* reopt
+        SCIP_BRANCHCAND* branchcand
+
     # ctypedef struct SCIP_EVENTFILTER:
     #     pass
     #
@@ -1762,8 +1769,10 @@ cdef extern from "scip/struct_implics.h":
 
 cdef extern from "scip/type_sepastore.h":
     ctypedef enum SCIP_EFFICIACYCHOICE:
-        pass
-
+        SCIP_EFFICIACYCHOICE_LP    = 0
+        SCIP_EFFICIACYCHOICE_RELAX = 1
+        SCIP_EFFICIACYCHOICE_NLP   = 2
+        
 cdef extern from "scip/sepastore.h":
     SCIP_RETCODE SCIPsepastoreApplyCuts(SCIP_SEPASTORE *sepastore, BMS_BLKMEM *blkmem, SCIP_SET *set, SCIP_STAT *stat, SCIP_PROB *transprob, SCIP_PROB *origprob, SCIP_TREE *tree, SCIP_REOPT *reopt, SCIP_LP *lp, SCIP_BRANCHCAND *branchcand, SCIP_EVENTQUEUE *eventqueue, SCIP_EVENTFILTER *eventfilter, SCIP_CLIQUETABLE *cliquetable, SCIP_Bool root, SCIP_EFFICIACYCHOICE efficiacychoice, SCIP_Bool *cutoff)
 # # # SCIP_PROB, SCIP_TREE, SCIP_REOPT, SCIP_BRANCHCAND, SCIP_CLIQUETABLE, SCIP_EFFICIACYCHOICE

@@ -4696,6 +4696,26 @@ cdef class Model:
         nlrows = SCIPgetNLPNlRows(self._scip)
         return [NLRow.create(nlrows[i]) for i in range(self.getNNlRows())]
 
+    def test_function3(self):
+        cdef SCIP_SEPASTORE* sepastore = self._scip.sepastore
+        cdef BMS_BLKMEM* probmem = self._scip.mem.probmem
+        cdef SCIP_SET* set = self._scip.set
+        cdef SCIP_STAT* stat = self._scip.stat
+        cdef SCIP_PROB* transprob = self._scip.transprob
+        cdef SCIP_PROB* origprob = self._scip.origprob
+        cdef SCIP_TREE* tree = self._scip.tree
+        cdef SCIP_REOPT* reopt = self._scip.reopt
+        cdef SCIP_LP* lp = self._scip.lp
+        cdef SCIP_BRANCHCAND* branchcand = self._scip.branchcand
+        cdef SCIP_EVENTQUEUE* eventqueue = self._scip.eventqueue
+        cdef SCIP_EVENTFILTER* eventfilter = self._scip.eventfilter
+        cdef SCIP_CLIQUETABLE* cliquetable = self._scip.cliquetable
+        cdef SCIP_Bool root = True # # <SCIP_Bool>True
+        cdef SCIP_Bool cutoff
+
+        PY_SCIP_CALL(SCIPsepastoreApplyCuts(sepastore, probmem, set, stat, transprob, origprob, tree, reopt, lp, branchcand, eventqueue, eventfilter, cliquetable, root, SCIP_EFFICIACYCHOICE_LP, &cutoff))
+        # PY_SCIP_CALL(SCIPcopyOrig(sourceModel._scip, self._scip, NULL, NULL, n, enablepricing, threadsafe, True, self._valid))
+
     def getPoolCuts(self):
         """Gets current cuts in the global cut pool."""
         cdef SCIP_CUT** cuts
