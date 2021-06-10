@@ -1740,6 +1740,35 @@ cdef extern from "scip/struct_lp.h":
     ctypedef struct SCIP_LP:
         pass
 
+cdef extern from "scip/struct_prob.h":
+    ctypedef struct SCIP_PROB:
+        pass
+
+cdef extern from "scip/struct_tree.h":
+    ctypedef struct SCIP_TREE:
+        pass
+
+cdef extern from "scip/struct_reopt.h":
+    ctypedef struct SCIP_REOPT:
+        pass
+
+cdef extern from "scip/struct_branch.h":
+    ctypedef struct SCIP_BRANCHCAND:
+        pass
+
+cdef extern from "scip/struct_implics.h":
+    ctypedef struct SCIP_CLIQUETABLE:
+        pass
+
+cdef extern from "scip/type_sepastore.h":
+    ctypedef enum SCIP_EFFICIACYCHOICE:
+        pass
+
+cdef extern from "scip/sepastore.h":
+    SCIP_RETCODE SCIPsepastoreApplyCuts(SCIP_SEPASTORE *sepastore, BMS_BLKMEM *blkmem, SCIP_SET *set, SCIP_STAT *stat, SCIP_PROB *transprob, SCIP_PROB *origprob, SCIP_TREE *tree, SCIP_REOPT *reopt, SCIP_LP *lp, SCIP_BRANCHCAND *branchcand, SCIP_EVENTQUEUE *eventqueue, SCIP_EVENTFILTER *eventfilter, SCIP_CLIQUETABLE *cliquetable, SCIP_Bool root, SCIP_EFFICIACYCHOICE efficiacychoice, SCIP_Bool *cutoff)
+# # # SCIP_PROB, SCIP_TREE, SCIP_REOPT, SCIP_BRANCHCAND, SCIP_CLIQUETABLE, SCIP_EFFICIACYCHOICE
+# cdef SCIP_RETCODE sepastoreApplyCut(SCIP_SEPASTORE* sepastore, BMS_BLKMEM* blkmem, SCIP_SET* set, SCIP_EVENTQUEUE* eventqueue, SCIP_EVENTFILTER* eventfilter, SCIP_LP* lp, SCIP_ROW* cut, int depth, int* ncutsapplied)
+#
 cdef class Expr:
     cdef public terms
 
