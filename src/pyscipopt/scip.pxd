@@ -283,6 +283,7 @@ cdef extern from "scip/scip.h":
     ctypedef struct SCIP:
     # we needsepastore, blkmem, set, eventqueue, eventfilter, lp, cut, depth, &ncutsapplied
         SCIP_STAT* stat
+        SCIP_MEM* mem
 
     # ctypedef struct SCIP_EVENTFILTER:
     #     pass
@@ -291,11 +292,6 @@ cdef extern from "scip/scip.h":
     #     pass
     #
     # ctypedef struct SCIP_LP:
-    #     pass
-    #
-    # ctypedef struct SCIP_MEM:
-    #     BMS_BLKMEM* setmem
-    #     BMS_BLKMEM* probmem
     #     pass
     #
     # ctypedef struct SCIP_SET:
@@ -1715,10 +1711,14 @@ cdef extern from "scip/pub_cutpool.h":
     int SCIPcutGetAge(SCIP_CUT* cut)
     SCIP_ROW* SCIPcutGetRow(SCIP_CUT* cut)
 
-cdef extern from 'scip/struct_stat.h':
+cdef extern from "scip/struct_stat.h":
     ctypedef struct SCIP_STAT:
         SCIP_Real 	primaldualintegral
 
+cdef extern from "scip/struct_mem.h":
+    ctypedef struct SCIP_MEM:
+        BMS_BLKMEM* setmem
+        BMS_BLKMEM* probmem
 
 cdef class Expr:
     cdef public terms

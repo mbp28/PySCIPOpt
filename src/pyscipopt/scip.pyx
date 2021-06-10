@@ -4682,6 +4682,9 @@ cdef class Model:
         #return SCIPgetNNodes(self._scip)
         cdef SCIP_STAT* stat = self._scip.stat
         cdef SCIP_Real gap = stat.primaldualintegral
+        cdef SCIP_MEM* mem = self._scip.mem
+        cdef BMS_BLKMEM* probmem = self._scip.mem.probmem
+
         return gap
         #return self._scip.stat.primaldualintegral
 
