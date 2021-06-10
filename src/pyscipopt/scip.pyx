@@ -4679,7 +4679,7 @@ cdef class Model:
       cdef SCIP_CLOCK* clock = self._scip.totaltime
       cdef SCIP_Real ltime = clock.lasttime
       #print(clock.lasttime)
-      return SCIPgetNNodes(self._scip)
+      return ltime
 
     def test_function2(self):
         """returns a list with the nonlinear rows in SCIP's internal NLP"""

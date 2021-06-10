@@ -1306,10 +1306,6 @@ cdef extern from "scip/scip.h":
 
     BMS_BLKMEM* SCIPblkmem(SCIP* scip)
 
-cdef extern from "scip/type_clock.h":
-    ctypedef struct SCIP_CLOCK:
-        SCIP_Real lasttime
-
 cdef extern from "scip/tree.h":
     int SCIPnodeGetNAddedConss(SCIP_NODE* node)
 
@@ -1722,6 +1718,10 @@ cdef extern from "scip/scip_cut.h":
 cdef extern from "scip/pub_cutpool.h":
     int SCIPcutGetAge(SCIP_CUT* cut)
     SCIP_ROW* SCIPcutGetRow(SCIP_CUT* cut)
+
+cdef extern from "scip/struct_clock.h":
+    ctypedef struct SCIP_CLOCK:
+        SCIP_Real lasttime
 
 cdef class Expr:
     cdef public terms
