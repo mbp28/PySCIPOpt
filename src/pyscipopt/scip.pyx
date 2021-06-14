@@ -4713,7 +4713,7 @@ cdef class Model:
         cdef SCIP_Bool root = True # # <SCIP_Bool>True
         cdef SCIP_Bool cutoff
 
-        PY_SCIP_CALL(SCIPsepastoreApplyCuts(sepastore, probmem, set, stat, transprob, origprob, tree, reopt, lp, branchcand, eventqueue, eventfilter, cliquetable, root, SCIP_EFFICIACYCHOICE_LP, &cutoff))
+        # pytPY_SCIP_CALL(SCIPsepastoreApplyCuts(sepastore, probmem, set, stat, transprob, origprob, tree, reopt, lp, branchcand, eventqueue, eventfilter, cliquetable, root, SCIP_EFFICIACYCHOICE_LP, &cutoff))
         # PY_SCIP_CALL(SCIPcopyOrig(sourceModel._scip, self._scip, NULL, NULL, n, enablepricing, threadsafe, True, self._valid))
 
     def getPoolCuts(self):

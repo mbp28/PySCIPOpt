@@ -1303,6 +1303,8 @@ cdef extern from "scip/scip.h":
 
     BMS_BLKMEM* SCIPblkmem(SCIP* scip)
 
+    # SCIP_RETCODE SCIPsepastoreApplyCuts(SCIP_SEPASTORE *sepastore, BMS_BLKMEM *blkmem, SCIP_SET *set, SCIP_STAT *stat, SCIP_PROB *transprob, SCIP_PROB *origprob, SCIP_TREE *tree, SCIP_REOPT *reopt, SCIP_LP *lp, SCIP_BRANCHCAND *branchcand, SCIP_EVENTQUEUE *eventqueue, SCIP_EVENTFILTER *eventfilter, SCIP_CLIQUETABLE *cliquetable, SCIP_Bool root, SCIP_EFFICIACYCHOICE efficiacychoice, SCIP_Bool *cutoff)
+
 cdef extern from "scip/type_clock.h":
     ctypedef struct SCIP_CLOCK:
         SCIP_Real lasttime
@@ -1772,12 +1774,11 @@ cdef extern from "scip/type_sepastore.h":
         SCIP_EFFICIACYCHOICE_LP    = 0
         SCIP_EFFICIACYCHOICE_RELAX = 1
         SCIP_EFFICIACYCHOICE_NLP   = 2
-        
+
 cdef extern from "scip/sepastore.h":
-    SCIP_RETCODE SCIPsepastoreApplyCuts(SCIP_SEPASTORE *sepastore, BMS_BLKMEM *blkmem, SCIP_SET *set, SCIP_STAT *stat, SCIP_PROB *transprob, SCIP_PROB *origprob, SCIP_TREE *tree, SCIP_REOPT *reopt, SCIP_LP *lp, SCIP_BRANCHCAND *branchcand, SCIP_EVENTQUEUE *eventqueue, SCIP_EVENTFILTER *eventfilter, SCIP_CLIQUETABLE *cliquetable, SCIP_Bool root, SCIP_EFFICIACYCHOICE efficiacychoice, SCIP_Bool *cutoff)
-# # # SCIP_PROB, SCIP_TREE, SCIP_REOPT, SCIP_BRANCHCAND, SCIP_CLIQUETABLE, SCIP_EFFICIACYCHOICE
-# cdef SCIP_RETCODE sepastoreApplyCut(SCIP_SEPASTORE* sepastore, BMS_BLKMEM* blkmem, SCIP_SET* set, SCIP_EVENTQUEUE* eventqueue, SCIP_EVENTFILTER* eventfilter, SCIP_LP* lp, SCIP_ROW* cut, int depth, int* ncutsapplied)
-#
+   SCIP_RETCODE SCIPsepastoreApplyCuts(SCIP_SEPASTORE *sepastore, BMS_BLKMEM *blkmem, SCIP_SET *set, SCIP_STAT *stat, SCIP_PROB *transprob, SCIP_PROB *origprob, SCIP_TREE *tree, SCIP_REOPT *reopt, SCIP_LP *lp, SCIP_BRANCHCAND *branchcand, SCIP_EVENTQUEUE *eventqueue, SCIP_EVENTFILTER *eventfilter, SCIP_CLIQUETABLE *cliquetable, SCIP_Bool root, SCIP_EFFICIACYCHOICE efficiacychoice, SCIP_Bool *cutoff)
+   SCIP_RETCODE sepastoreApplyCut(SCIP_SEPASTORE* sepastore, BMS_BLKMEM* blkmem, SCIP_SET* set, SCIP_EVENTQUEUE* eventqueue, SCIP_EVENTFILTER* eventfilter, SCIP_LP* lp, SCIP_ROW* cut, int depth, int* ncutsapplied)
+
 cdef class Expr:
     cdef public terms
 
